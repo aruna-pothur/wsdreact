@@ -12,9 +12,9 @@ import { PublicClientApplication, EventType } from '@azure/msal-browser';
 
 const pca = new PublicClientApplication({
     auth: {
-        clientId: '739d2629-c882-407e-982c-0879525ad5c8',
+        clientId: 'd8709f2a-a693-42dd-a504-5dd27d7f1de0',
         authority: 'https://login.microsoftonline.com/a3b4cbab-a447-4530-8ed7-2c77e701be99',
-        redirectUri: 'https://calm-wave-0c9990610.4.azurestaticapps.net',
+        redirectUri: '/',
     },
     cache: {
         cacheLocation: 'localStorage',
