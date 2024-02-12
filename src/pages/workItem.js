@@ -135,7 +135,7 @@ function WorkItem({msalInstance}) {
             axios.put(`https://wsdcrud.azurewebsites.net/api/items/${workItem.id}}`, {...workItem})
             .then(response => {
                 console.log({ response });
-                if(response.status === '204') {
+                if(response.status === 204) {
                     setSuccess(true);
                 } else {
                     setFailed(true);
