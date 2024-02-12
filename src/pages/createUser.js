@@ -27,7 +27,7 @@ function CreateUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({user});
-    axios.post('https://wsdcrud.azurewebsites.net/api/items', {...user, partition:'test', id:user.sapid}).then(response => {
+    axios.post('https://wsdcrud.azurewebsites.net/api/users', {...user, partition:'test', id:user.sapid}).then(response => {
       if(response.data.id) {
         setSuccess(true);
       } else {
