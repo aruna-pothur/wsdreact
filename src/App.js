@@ -1,58 +1,47 @@
-import Grid from "@mui/material/Grid";
-import { PageLayout } from "./components/PageLayout";
-import { Routes, Route } from "react-router-dom";
-
-import { Home } from "./pages/Home";
-import { Profile } from "./pages/Profile";
-
+import { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { MsalProvider, useMsal, useIsAuthenticated } from "@azure/msal-react";
 import { InteractionRequiredAuthError } from "@azure/msal-browser";
-import { useEffect } from "react";
-import CreateUser from "./pages/createUser";
-
+import Dashboard from './pages/dashboard';
+import CreateUser from './pages/createUser';
+import Header from './components/header';
+import WorkItem from './pages/workItem';
 
 function App({ msalInstance }) {
-    return (
-        <MsalProvider instance={msalInstance}>
-            <PageLayout>
-                <Grid container justifyContent="center">
-                    <Pages />
-                </Grid>
-            </PageLayout>
-        </MsalProvider>
-    );
-}
+  const { instance } = useMsal();
+  const isAuthenticated = useIsAuthenticated();
 
-const Pages = () => {
-    const { instance } = useMsal();
-    const isAuthenticated = useIsAuthenticated();
+  useEffect(() => {
+    if (!isAuthenticated) {
+        // TODO: grab the username from query params
 
-    useEffect(() => {
-        if (!isAuthenticated) {
-            // TODO: grab the username from query params
+        instance.ssoSilent({
+            scopes: ["user.read"],
+            loginHint: "diegos@msaltestingjs.onmicrosoft.com"
+        }).then((response) => {
+            instance.setActiveAccount(response.account);
+        }).catch((error) => {
+            if (error instanceof InteractionRequiredAuthError) {
+                instance.loginRedirect({
+                    scopes: ["user.read"],
+                });
+            }
+        });
+    }
+  }, [instance, isAuthenticated]);
 
-            instance.ssoSilent({
-                scopes: ["user.read"],
-                loginHint: "diegos@msaltestingjs.onmicrosoft.com"
-            }).then((response) => {
-                instance.setActiveAccount(response.account);
-            }).catch((error) => {
-                if (error instanceof InteractionRequiredAuthError) {
-                    instance.loginRedirect({
-                        scopes: ["user.read"],
-                    });
-                }
-            });
-        }
-    }, [instance, isAuthenticated]);
-
-    return (
+  return (
+    <MsalProvider instance={msalInstance}>
+      <Router>
+        <Header />
         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/createUser" element={<CreateUser />} />
+          <Route path="/" exact element={<Dashboard />} />
+          <Route path="/createUser" element={<CreateUser />} />
+          <Route path="/workItem" element={<WorkItem />} />
         </Routes>
-    );
+      </Router>
+    </MsalProvider>
+  )
 }
 
-export default App;
+export default App

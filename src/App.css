@@ -1,0 +1,39 @@
+input[type=text], input[type=email], select {
+  width: 100%;
+  padding: 15px 0 15px 0;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.registerbtn {
+  background-color: #c0d3cc;
+  color: rgb(15, 13, 13);
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  font-size: large;
+}
+
+.item1 { grid-area: header; }
+.item2 { grid-area: menu; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header menu menu menu';
+  gap: 10px;
+  background-color: #f4f4f4;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
