@@ -107,7 +107,7 @@ function Dashboard() {
                                                     <TableCell>Start Date</TableCell>
                                                     <TableCell>End Date</TableCell>
                                                     {/* <TableCell>Total hours</TableCell> */}
-                                                    <TableCell></TableCell>
+                                                    <TableCell>Actions</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
@@ -122,8 +122,10 @@ function Dashboard() {
                                                         {/* <TableCell>{row.total_hours}</TableCell> */}
                                                         <TableCell>
                                                             <div>
-                                                                <Button variant="outlined" onClick={()=>workItem(row)}>Action</Button>
+                                                                <Button style={{marginRight:'10px'}} variant="outlined" onClick={()=>workItem(row)}>Edit</Button>
+                                                                <Button  variant="outlined">Action</Button>
                                                             </div>
+                                                            
                                                         </TableCell>
                                                     </TableRow>
                                                 ))}
