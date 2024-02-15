@@ -26,7 +26,7 @@ function Header() {
     return (
         <div className='header'>
             <div>
-                <h1 className='titleColor'>WORKITEM DASHBOARD</h1>
+                <h1 className='titleColor'>WORK ITEM DASHBOARD</h1>
             </div>
             <div style={{display:'flex', alignItems:'center'}}>
                 {isAuthenticated ? <div className='titleColor' style={{marginRight:'15px'}}>Welcome, {username}</div> : null}
